@@ -33,4 +33,29 @@ public class ImageTransformations {
         }
         return newImage;
     }
+    public static Pixel[][] rotateClockwise(Pixel[][] originalImage) {
+        Pixel[][] newImage = new Pixel[originalImage[0].length][originalImage.length];
+        for(int row = 0; row < newImage[0].length; row++) {
+            for (int col = 0; col < newImage.length; col++, ) {
+                newImage[row][col] = originalImage[col][row];
+            }    
+        }
+        return newImage;
+    }
+    
+    public static void main(String[] args) {
+        // Read miners.png into a 2D Pixel array.
+        Picture picture = new Picture("miners.png");
+        Pixel[][] originalImage = picture.getImageMatrix();
+        Pixel[][] newImage = convertToGrayscale(originalImage);
+        newImage = mirrorVertically(newImage);
+        newImage = rotateClockwise(newImage);
+        // TODO: Fix the image by using your convertToGrayscale, mirrorVertically, and
+        // rotateClcokwise methods.
+
+        // TODO: To save your image, uncomment the lines below and add your Pixel array as the
+        // argument to the Picture constructor.
+        Picture result = new Picture(newImage);
+        result.save("miners_fixed.png");
+    }
 }
